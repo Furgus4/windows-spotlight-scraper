@@ -1,4 +1,8 @@
-# windows-spotlight-scraper
-Finds, copies, and renames spotlight wallpapers as they download, before they're gone.
+# Windows Spotlight Scraper
+I noticed that you can't find certain windows spotlight images online, so I made a program that finds, copies, and renames spotlight wallpapers as they download, before they're gone.
+This allows me to create custom slideshows with the ones I like, or use them as inspiration in my creative projects.
 
-how to set it up and stuff
+
+I used windows task scheduler to run the program on login.
+
+Make sure to setup the folder locations correctly in the script.

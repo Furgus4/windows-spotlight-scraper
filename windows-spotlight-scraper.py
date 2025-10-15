@@ -5,7 +5,7 @@ from datetime import datetime
 spotlight_path = "C:\\Users\\{put username here}\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets"
 spotlight_desktop_path = "C:\\Users\\{put username here}\\AppData\\Local\\Packages\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\LocalCache\\Microsoft\\IrisService\\7073164735893850138"
 my_path = "C:\\Users\\{put username here}\\Pictures\\Windows Spotlight"
-state_path = my_path + "\\state.txt" # make sure state.txt is in the windoows spotlight folder (my_path)
+state_path = my_path + "\\state.txt" # make sure state.txt is in the windoows spotlight folder (my_path), otherwise you'd have to change this path
 
 if __name__ == "__main__":
     s_image_names = os.listdir(spotlight_path)
@@ -25,6 +25,8 @@ if __name__ == "__main__":
                 shutil.copy(image_path, destination)
                 index += 1
 
+    # I could probably create a function to repeat less code,
+    # but this is so simple that it's not even worth it
     for name in sd_image_names:
         if name not in prev_names:
             image_path = spotlight_desktop_path + "\\" + name

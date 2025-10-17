@@ -4,7 +4,7 @@ This allows me to create custom slideshows with the ones I like, or use them as 
 
 
 I used windows task scheduler to run the program on login.
-I setup the action to run python.exe with the script location as an argument.
+I setup the action to run pythonw.exe with the script location as an argument.
 
 
 Make sure to setup the folder locations correctly in the script.

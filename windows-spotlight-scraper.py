@@ -2,14 +2,13 @@ import os
 import shutil
 from datetime import datetime
 
-lockscreen_path = "C:\\Users\\ryant\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets"
+lockscreen_path = "... stuff here \\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_{something here}\\LocalState\\Assets"
 
 # can have subfolders
-desktop_path = "C:\\Users\\ryant\\AppData\\Local\\Packages\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\LocalCache\\Microsoft\\IrisService"
+desktop_path = "... stuff here \\AppData\\Local\\Packages\\MicrosoftWindows.Client.CBS_{something here}\\LocalCache\\Microsoft\\IrisService"
 
-# folder I want all the images in
-my_path = "C:\\Users\\ryant\\Pictures\\Windows Spotlight"
-state_path = my_path + "\\state.txt"
+my_path = "folder you want everything coppied to"
+state_path = my_path + "\\state.txt" # arbitrary location
 
 def copy_and_rename_images(folder_path, folder_destination, index=0):
     image_names = os.listdir(folder_path)

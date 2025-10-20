@@ -2,36 +2,49 @@ import os
 import shutil
 from datetime import datetime
 
-spotlight_path = "C:\\Users\\{put username here}\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets"
-spotlight_desktop_path = "C:\\Users\\{put username here}\\AppData\\Local\\Packages\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\LocalCache\\Microsoft\\IrisService\\7073164735893850138"
-my_path = "C:\\Users\\{put username here}\\Pictures\\Windows Spotlight"
-state_path = my_path + "\\state.txt" # make sure state.txt is in the windoows spotlight folder (my_path), otherwise you'd have to change this path
+lockscreen_path = "C:\\Users\\ryant\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets"
 
-if __name__ == "__main__":
-    s_image_names = os.listdir(spotlight_path)
-    sd_image_names = os.listdir(spotlight_desktop_path)
+# can have subfolders
+desktop_path = "C:\\Users\\ryant\\AppData\\Local\\Packages\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\LocalCache\\Microsoft\\IrisService"
+
+# folder I want all the images in
+my_path = "C:\\Users\\ryant\\Pictures\\Windows Spotlight"
+state_path = my_path + "\\state.txt"
+
+def copy_and_rename_images(folder_path, folder_destination, index=0):
+    image_names = os.listdir(folder_path)
 
     with open(state_path) as s:
-        prev_names = s.read().split()
+        past_names = s.read().split()
 
-    index = 0
-    for name in s_image_names:
-        if name not in prev_names:
-            image_path = spotlight_path + "\\" + name
+    for name in image_names:
+        if name not in past_names:
+            print(index)
             with open(state_path, "a") as s:
                 s.write(name + "\n")
-            if os.path.getsize(image_path) >= 180000: # filters out some icons
-                destination = my_path + "\\" + datetime.today().strftime("%m_%d_%Y.%H_%M.") + str(index) + ".jpg"
-                shutil.copy(image_path, destination)
-                index += 1
-
-    # I could probably create a function to repeat less code,
-    # but this is so simple that it's not even worth it
-    for name in sd_image_names:
-        if name not in prev_names:
-            image_path = spotlight_desktop_path + "\\" + name
-            with open(state_path, "a") as s:
-                s.write(name + "\n")
-            destination = my_path + "\\" + datetime.today().strftime("%m_%d_%Y.%H_%M.") + str(index) + ".jpg"
+            image_path = folder_path + "\\" + name
+            destination = folder_destination + "\\" + datetime.today().strftime("%m_%d_%Y.%H_%M.") + str(index) + ".jpg"
             shutil.copy(image_path, destination)
             index += 1
+    return index
+
+def main():
+    sub_desktop_folders = []
+
+    # get first level of sub_folders
+    stopper = False
+    for data in os.walk(desktop_path):
+        if not stopper:
+            sub_desktop_folders = data[1]
+        stopper = True
+
+    global_index = 0
+
+    for folder in sub_desktop_folders:
+        folder_path = desktop_path + "\\" + folder
+        global_index = copy_and_rename_images(folder_path, my_path, global_index)
+
+    copy_and_rename_images(lockscreen_path, my_path, global_index)
+
+if __name__ == "__main__":
+    main()

@@ -8,3 +8,6 @@ I setup the action to run pythonw.exe with the script location as an argument.
 
 
 Make sure to setup the folder locations correctly in the script.
+
+
+TODO: just found out the desktop spotlight folder can have sub-folders, need to loop through those

@@ -5,3 +5,7 @@ This allows me to create custom background slideshows with the ones I like, or u
 
 I use windows task scheduler to run the program on login.
 I setup the action to run pythonw.exe with the script location as an argument.
+
+
+TODO:
+- Consider finding the aspect ratios of the photos and removing the duplicate portrait versions.
